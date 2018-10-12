@@ -6,7 +6,7 @@
 #    By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/12 16:38:13 by vimucchi          #+#    #+#              #
-#    Updated: 2018/10/12 17:09:36 by vimucchi         ###   ########.fr        #
+#    Updated: 2018/10/12 17:52:09 by vimucchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CPPFLAGS = -Iinclude
 LDFLAGS = -L./libft
 LDLIBS = -lft
 CFLAGS = -Wall -Wextra -Werror
-CC = gcc
+CC = clang
 SRC = main.c \
 		get_next_line.c \
 
@@ -28,7 +28,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@echo "\033[32m>>\033[0m \033[33mStarting library & $(NAME)\033[32m compilation\033[0m \033[0m"
 	@make -C libft
-	@$(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
+	@$(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@.out
 	@echo "\033[32m>> $(NAME) correctly created ... OK\033[0m"
 
 %.o: %.c
@@ -40,7 +40,7 @@ clean:
 	@echo "\033[32mObjects \033[31mremoved\033[0m"
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(NAME).out
 	@make -C libft fclean
 	@echo "\033[32m$(NAME) \033[31mremoved\033[0m"
 

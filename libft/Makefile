@@ -6,12 +6,12 @@
 #    By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/28 15:20:11 by vimucchi          #+#    #+#              #
-#    Updated: 2018/10/12 17:08:40 by vimucchi         ###   ########.fr        #
+#    Updated: 2018/10/12 17:47:40 by vimucchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-
+CC = clang
 FLAGS = -Wall -Werror -Wextra
 
 SRC = \
@@ -84,7 +84,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 %.o: %.c 
-	@gcc $(FLAGS) -o $@ -c $<
+	@$(CC) $(FLAGS) -o $@ -c $<
 
 $(NAME): $(OBJ) libft.h
 	@ar rc $(NAME) $(OBJ)
