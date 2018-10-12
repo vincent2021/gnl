@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/11 21:27:48 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/10/12 16:58:45 by vimucchi         ###   ########.fr       */
+/*   Created: 2018/10/12 16:40:11 by vimucchi          #+#    #+#             */
+/*   Updated: 2018/10/12 17:04:46 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "get_next_line.h"
 
-# include <fcntl.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "./libft/libft.h"
+int		main(int argc, char **argv)
+{
+	char **line;
 
-# define BUF_SIZE 8
-
-int get_next_line(const int fd, char **line);
-
-#endif
+	line = (char**)malloc(4);
+	line[0] = malloc(sizeof(char) * 99);
+	if (argc == 2)
+	{
+		get_next_line(open(argv[1],O_RDONLY), line);
+	}
+	return(0);
+}

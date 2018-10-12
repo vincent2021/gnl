@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/11 21:27:48 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/10/12 16:58:45 by vimucchi         ###   ########.fr       */
+/*   Created: 2018/04/08 13:51:16 by vimucchi          #+#    #+#             */
+/*   Updated: 2018/04/23 00:06:59 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <fcntl.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "./libft/libft.h"
+char	*ft_strdup(const char *s1)
+{
+	size_t	i;
+	size_t	l;
+	char	*dst;
 
-# define BUF_SIZE 8
-
-int get_next_line(const int fd, char **line);
-
-#endif
+	i = 0;
+	l = ft_strlen(s1);
+	if (!(dst = ft_strnew(l)))
+		return (NULL);
+	dst[l] = '\0';
+	while (i < l)
+	{
+		dst[i] = s1[i];
+		i++;
+	}
+	return (dst);
+}

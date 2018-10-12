@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/11 21:27:48 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/10/12 16:58:45 by vimucchi         ###   ########.fr       */
+/*   Created: 2018/04/07 19:01:01 by vimucchi          #+#    #+#             */
+/*   Updated: 2018/04/07 20:50:32 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <fcntl.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "./libft/libft.h"
-
-# define BUF_SIZE 8
-
-int get_next_line(const int fd, char **line);
-
-#endif
+int	ft_putchar(char c)
+{
+	write(1, &c, 1);
+	if (ft_isprint(c))
+		return (c);
+	return (1);
+}

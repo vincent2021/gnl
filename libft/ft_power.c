@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_power.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/11 21:27:48 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/10/12 16:58:45 by vimucchi         ###   ########.fr       */
+/*   Created: 2018/04/28 20:05:54 by vimucchi          #+#    #+#             */
+/*   Updated: 2018/04/30 22:58:22 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <fcntl.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "./libft/libft.h"
-
-# define BUF_SIZE 8
-
-int get_next_line(const int fd, char **line);
-
-#endif
+size_t		ft_power(size_t nb, int power)
+{
+	if (power < 0 || nb > 4294967296)
+		return (0);
+	else if (power == 0)
+		return (1);
+	else
+		nb = nb * ft_power(nb, power - 1);
+	return (nb);
+}
