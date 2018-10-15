@@ -6,7 +6,7 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:57:44 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/10/15 19:09:14 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/10/15 19:27:33 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ int	get_next_line(const int fd, char **line)
 			c_line++;
 			line[c_line] = malloc(1024);
 		}
+		if (i < c_read)
+			ft_strncat(line[c_line], buf + i + 1, c_read - i - 1);
 	}
 	j = 0;
+	ft_putstr("Line: \n");
 	while(j < c_line)
 	{
 		ft_putstr(line[j]);
