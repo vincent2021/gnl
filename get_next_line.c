@@ -6,7 +6,7 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:57:44 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/10/12 18:28:34 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/10/15 19:09:14 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,31 @@ int	get_next_line(const int fd, char **line)
 {
 	char	*buf;
 	int		i;
-	int		l;
+	int		j;
+	int		c_read;
+	int		c_line;
 
 	buf = malloc(sizeof(char)*(BUF_SIZE+1));
-	
-	i = 0;
-	l = 0;
-	while(line[l][i] != '\n')
+	c_line = 0;
+	line[c_line] = malloc(1024);
+	while((c_read = read(fd, buf, BUF_SIZE)) != 0)
 	{
-		read(fd,line[l], BUF_SIZE);
-		ft_putnbr(l);
-		ft_putnbr(i);
-		ft_putstr(" - Line:\n");	
-		ft_putstr(line[l]);
-		ft_putstr("\n");
-		i++;
+		i = 0;
+		while (buf[i] != '\n' && i < c_read)
+			i++;
+		ft_strncat(line[c_line], buf, i);
+		if (buf[i] == '\n')
+		{
+			c_line++;
+			line[c_line] = malloc(1024);
+		}
 	}
-	l++;
-	
-	read(fd, buf, BUF_SIZE);
-	buf[BUF_SIZE+1] = '\0';
-	ft_putstr("Buffer: \n");
-	ft_putstr(buf);
-
+	j = 0;
+	while(j < c_line)
+	{
+		ft_putstr(line[j]);
+		ft_putchar('\n');
+		j++;
+	}
 	return(0);
 }
