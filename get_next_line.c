@@ -6,7 +6,7 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:57:44 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/10/15 20:05:46 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/10/16 18:49:03 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	get_next_line(const int fd, char **line)
 	int		i;
 	int		j;
 	int		c_read;
+	int		c_scan;
 	int		c_line;
 
 	buf = malloc(sizeof(char)*(BUF_SIZE+1));
@@ -25,20 +26,28 @@ int	get_next_line(const int fd, char **line)
 	line[c_line] = malloc(1024);
 	while((c_read = read(fd, buf, BUF_SIZE)) != 0)
 	{
-		i = 0;
-		while (buf[i] != '\n' && i < c_read)
-			i++;
-		ft_strncat(line[c_line], buf, i);
-		if (buf[i] == '\n')
+		c_scan = 0;
+		while(c_scan < c_read)
 		{
-			c_line++;
-			line[c_line] = malloc(1024);
+			i = 0;
+			while (buf[i] != '\n' && buf[i])
+			{
+				i++;
+				c_scan++;
+			}
+			ft_strncat(line[c_line], buf, i);
+			if (buf[i] == '\n')
+			{
+				c_line++;
+				line[c_line] = malloc(1024);
+				c_scan++;
+				i++;
+			}
+			buf = buf + i;
 		}
-		if (i < c_read)
-			ft_strncat(line[c_line], buf + i + 1, c_read - i - 1);
 	}
 	j = 0;
-	ft_putstr("Line: \n");
+	ft_putstr("Line:\n");
 	while(j < c_line)
 	{
 		ft_putstr(line[j]);
