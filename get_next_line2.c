@@ -6,53 +6,34 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:57:44 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/10/16 19:03:12 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/10/16 19:41:04 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	get_next_line(const int fd, char **line)
+int	get_line(const int fd, char **line)
 {
 	char	*buf;
+	char	*str;
 	int		i;
-	int		j;
 	int		c_read;
-	int		c_scan;
 	int		c_line;
 
 	buf = malloc(sizeof(char)*(BUF_SIZE+1));
 	c_line = 0;
-	line[c_line] = malloc(1024);
-	while((c_read = read(fd, buf, BUF_SIZE)) != 0)
+	if((c_read = read(fd, buf, BUF_SIZE)) != 0)
 	{
-		c_scan = 0;
-		while(c_scan < c_read)
-		{
-			i = 0;
-			while (buf[i] != '\n' && buf[i])
-			{
-				i++;
-				c_scan++;
-			}
-			ft_strncat(line[c_line], buf, i);
-			if (buf[i] == '\n')
-			{
-				c_line++;
-				line[c_line] = malloc(1024);
-				c_scan++;
-				i++;
-			}
-			buf = buf + i;
-		}
+		i = 0;
+		while (buf[i] != '\n' && buf[i])
+			i++;
+		str = ft_strnew(i + 1);
+		ft_strncat(str, buf, i);
 	}
-	j = 0;
-	ft_putstr("GNL Function:\n");
-	while(j < c_line)
-	{
-		ft_putstr(line[j]);
-		ft_putchar('\n');
-		j++;
-	}
-	return(0);
+	else
+		return (0);
+	line = &str;
+	ft_putstr("Get line Function:\n");
+	ft_putstr(*line);
+	return (1);
 }
