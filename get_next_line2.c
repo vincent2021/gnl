@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:57:44 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/10/16 19:41:04 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/10/17 18:13:50 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@ int	get_line(const int fd, char **line)
 	int		i;
 	int		c_read;
 	int		c_line;
-
-	buf = malloc(sizeof(char)*(BUF_SIZE+1));
+	
+	if (!(buf = malloc(sizeof(char)*(BUFF_SIZE+1))));
+		return (-1);
+	if (fd = 0 || line = NULL || read(fd, buf, BUFF_SIZE) == -1)
+		return (-1);
+	
 	c_line = 0;
-	if((c_read = read(fd, buf, BUF_SIZE)) != 0)
+	if((c_read = read(fd, buf, BUFF_SIZE)) != 0)
 	{
 		i = 0;
 		while (buf[i] != '\n' && buf[i])
