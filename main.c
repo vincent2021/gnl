@@ -6,7 +6,7 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 16:40:11 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/10/16 19:40:52 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/10/17 13:47:23 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 int		main(int argc, char **argv)
 {
-	char **line;
-	char *str;
+	char *line;
+	int		fd;
 
-	line = malloc(sizeof(char*));
-	if (argc == 2)
+	if(argc != 2)
+		fd = 0;
+	else
+		fd = open(argv[1], O_RDONLY);
+	while (get_line(fd, &line) == 1)
 	{
-		get_line(open(argv[1],O_RDONLY), line);
-		ft_putstr("\nFrom main");
-		str = *line;
-		ft_putstr(str);
-		ft_putchar('\n');
+		ft_putendl(line);
+		free(line);
 	}
+	return(0);
+	if (argc == 2)
+		close(fd);
 	return(0);
 }
