@@ -1,43 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line2.c                                   :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:57:44 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/10/18 17:22:40 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/10/18 16:00:41 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	get_next_line(const int fd, char **line)
-{
-	static t_list	gnl;
-	char			*buf;
-	char			*str;
-	int				i;
-	int				c_read;
-	t_list			tmp;
+int	old_get_next_line(const int fd, char **line)
 
-	tmp = gnl;
-	str = ft_strnew(1000);
-	*line = str;	
-	if (!(buf = malloc(sizeof(char)*(BUFF_SIZE+1))))
-		return (-1);
-	if (fd == 0 || line == NULL || read(fd, buf, BUFF_SIZE) == -1)
-		return (-1);
+{
+	char	*buf;
+	int		i;
+	int		j;
+	int		c_read;
+	int		c_scan;
+	int		c_line;
+
+	buf = malloc(sizeof(char)*(BUFF_SIZE+1));
+	c_line = 0;
+	line[c_line] = malloc(1024);
 	while((c_read = read(fd, buf, BUFF_SIZE)) != 0)
 	{
-		i = 0;
-		buf[BUFF_SIZE + 1] = '\0';
-		ft_putendl(buf);
-		while (buf[i] != '\n' && buf[i])			
-			i++;
-		ft_strncat(str, buf, i);
-		if (buf[i] == '\n')
-			return (1);
+		c_scan = 0;
+		while(c_scan < c_read)
+		{
+			i = 0;
+			while (buf[i] != '\n' && buf[i])
+			{
+				i++;
+				c_scan++;
+			}
+			ft_strncat(line[c_line], buf, i);
+			if (buf[i] == '\n')
+			{
+				c_line++;
+				line[c_line] = malloc(1024);
+				c_scan++;
+				i++;
+			}
+			buf = buf + i;
+		}
 	}
-	return (0);
+	j = 0;
+	ft_putstr("GNL Function:\n");
+	while(j < c_line)
+	{
+		ft_putstr(line[j]);
+		ft_putchar('\n');
+		j++;
+	}
+	return(0);
 }

@@ -6,7 +6,7 @@
 #    By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/12 16:38:13 by vimucchi          #+#    #+#              #
-#    Updated: 2018/10/16 19:11:37 by vimucchi         ###   ########.fr        #
+#    Updated: 2018/10/18 16:03:06 by vimucchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ CFLAGS = -Wall -Wextra -Werror
 CC = clang
 SRC = main.c \
 		get_next_line.c \
-		get_next_line2.c \
 
 OBJ = $(SRC:.c=.o)
 
