@@ -6,7 +6,7 @@
 /*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:27:48 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/10/16 19:18:53 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/10/17 18:14:02 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include "libft/libft.h"
 
-# define BUF_SIZE 8
+# define BUFF_SIZE 8
 
 int get_next_line(const int fd, char **line);
 int	get_line(const int fd, char **line);
