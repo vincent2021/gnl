@@ -6,7 +6,7 @@
 /*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:27:48 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/10/18 16:02:58 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/10/19 17:02:12 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "libft/libft.h"
 
 # define BUFF_SIZE 8
+# define EOF (-1)
 
 int get_next_line(const int fd, char **line);
 int	old_get_next_line(const int fd, char **line);

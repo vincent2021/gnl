@@ -6,7 +6,7 @@
 /*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 12:22:15 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/10/19 16:24:29 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/10/19 17:17:29 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ int	get_next_line(const int fd, char **line)
 	*line = str;	
 	if (!(buf = malloc(sizeof(char)*(BUFF_SIZE + 1))))
 		return (-1);
-	if (line == NULL || read(fd, buf, 0) == -1)
+	if (line == NULL || read(fd, buf, 0) == -1 || fd < 0)
 		return (-1);
 	while((c_read = read(fd, buf, BUFF_SIZE)) != 0)
 	{
 		i = 0;
 		buf[BUFF_SIZE + 1] = '\0';
-		while (buf[i] != '\n' && buf[i])			
+		while ((buf[i] != '\n' || buf[i] == EOF) && buf[i])			
 			i++;
 		if (ft_strlen(remain) > 0)
 			ft_strncat(str, remain, ft_strlen(remain));
