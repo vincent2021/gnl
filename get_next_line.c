@@ -6,7 +6,7 @@
 /*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 12:22:15 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/10/24 18:06:35 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/10/26 11:24:42 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,11 @@ int				get_next_line(const int fd, char **line)
 	char		*buf;
 	char		*str;
 	static char	*remain;
-	int			i;
-	int			c_read;
+	int		i;
+	int		c_read;
+	//int		flag;
 
+	//flag = 0;
 	if (!(buf = malloc(sizeof(char) * (BUFF_SIZE + 1))))
 		return (-1);
 	if (line == NULL || read(fd, buf, 0) == -1 || fd < 0)
@@ -68,6 +70,7 @@ int				get_next_line(const int fd, char **line)
 		{
 			ft_strncat(str, remain, i);
 			remain = remain + i + 1;
+			//flag = 1;
 			return (1);
 		}
 		else
@@ -77,17 +80,20 @@ int				get_next_line(const int fd, char **line)
 	{
 		i = 0;
 		buf[BUFF_SIZE + 1] = '\0';
-		while ((buf[i] != '\n' || buf[i] == EOF) && buf[i])
+		while (buf[i] != '\n' && buf[i])
 			i++;
 		ft_strncat(str, buf, i);
 		if (buf[i] == '\n' && i < BUFF_SIZE)
 		{
 			ft_strncpy(remain, buf + i + 1, BUFF_SIZE - i);
+			//flag = 1;
 			return (1);
 		}
 	}
 	if (c_read == 0)
 	{
+		//if (flag == 0 && ft_strlen(str) > 0)
+			//return (1);	
 		str[0] = '\0';
 		return (0);
 	}
