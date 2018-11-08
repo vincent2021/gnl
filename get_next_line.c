@@ -6,7 +6,7 @@
 /*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 12:22:15 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/10/26 11:24:42 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/11/08 14:57:10 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,15 @@ int				get_next_line(const int fd, char **line)
 	static char	*remain;
 	int		i;
 	int		c_read;
-	//int		flag;
 
-	//flag = 0;
 	if (!(buf = malloc(sizeof(char) * (BUFF_SIZE + 1))))
 		return (-1);
 	if (line == NULL || read(fd, buf, 0) == -1 || fd < 0)
 		return (-1);
 	str = ft_strnew(1000);
 	*line = str;
+	ft_putstr("Remain_GNL_1:");
+	ft_putendl(remain);
 	if (!remain)
 		remain = ft_strnew(100);
 	else
@@ -70,12 +70,13 @@ int				get_next_line(const int fd, char **line)
 		{
 			ft_strncat(str, remain, i);
 			remain = remain + i + 1;
-			//flag = 1;
 			return (1);
 		}
 		else
 			ft_strcat(str, remain);
 	}
+	ft_putstr("Remain_GNL_2:");
+	ft_putendl(remain);
 	while ((c_read = read(fd, buf, BUFF_SIZE)) != 0)
 	{
 		i = 0;
@@ -86,15 +87,25 @@ int				get_next_line(const int fd, char **line)
 		if (buf[i] == '\n' && i < BUFF_SIZE)
 		{
 			ft_strncpy(remain, buf + i + 1, BUFF_SIZE - i);
-			//flag = 1;
 			return (1);
 		}
 	}
+	ft_putnbr(ft_strlen(str));
+	ft_putchar('/');
+	ft_putnbr(c_read);
+	ft_putchar('/');
+	ft_putnbr(ft_strlen(remain));
+	ft_putchar('\n');
+	ft_putstr("Remain_GNL_3:");
+	ft_putendl(remain);
 	if (c_read == 0)
 	{
-		//if (flag == 0 && ft_strlen(str) > 0)
-			//return (1);	
-		str[0] = '\0';
+		if (ft_strlen(str) > 0)
+		{
+			ft_bzero(remain, ft_strlen(remain));
+			return (1);
+		}	
+		free(str);
 		return (0);
 	}
 	return (-1);
