@@ -83,6 +83,7 @@ int				get_next_line(const int fd, char **line)
 		if (buf[i] == '\n' && i < BUFF_SIZE)
 		{
 			ft_strncpy(remain, buf + i + 1, BUFF_SIZE - i);
+			free(buf);
 			return (1);
 		}
 	}
