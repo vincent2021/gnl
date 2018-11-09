@@ -1,49 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_debug.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 12:22:15 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/11/09 09:09:55 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/11/09 09:09:05 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_list			*ft_list_mgmt(t_list *gnl, const int fd, char *str)
-{
-	t_list		*tmp;
-
-	tmp = gnl;
-	while (tmp)
-	{
-		if ((size_t)fd == tmp->content_size)
-			return (tmp);
-		tmp = tmp->next;
-	}
-	tmp = ft_lstnew(str, fd);
-	ft_lstadd(&gnl, tmp);
-	return (tmp);
-}
-
-char			*ft_split(char *str)
-{
-	int			i;
-
-	i = 0;
-	while (str[i] != '\n' && str[i])
-		i++;
-	if (str[i] == '\n' && str[i + 1] != '\0')
-	{
-		str = str + i + 1;
-		return (ft_strdup(str));
-	}
-	return (ft_strnew(1));
-}
-
-int				get_next_line(const int fd, char **line)
+int				get_next_line_dbg(const int fd, char **line)
 {
 	char		*buf;
 	char		*str;
@@ -57,6 +26,8 @@ int				get_next_line(const int fd, char **line)
 		return (-1);
 	str = ft_strnew(1000);
 	*line = str;
+	ft_putstr("Remain_GNL_1:");
+	ft_putendl(remain);
 	if (!remain)
 		remain = ft_strnew(100);
 	else
@@ -73,10 +44,14 @@ int				get_next_line(const int fd, char **line)
 		else
 			ft_strcat(str, remain);
 	}
+	ft_putstr("Remain_GNL_2:");
+	ft_putendl(remain);
 	while ((c_read = read(fd, buf, BUFF_SIZE)) != 0)
 	{
 		i = 0;
 		buf[c_read] = '\0';
+		ft_putstr("Buf:");
+		ft_putendl(buf);
 		while (buf[i] != '\n' && buf[i])
 			i++;
 		ft_strncat(str, buf, i);
@@ -86,6 +61,14 @@ int				get_next_line(const int fd, char **line)
 			return (1);
 		}
 	}
+	ft_putnbr(ft_strlen(str));
+	ft_putchar('/');
+	ft_putnbr(c_read);
+	ft_putchar('/');
+	ft_putnbr(ft_strlen(remain));
+	ft_putchar('\n');
+	ft_putstr("Remain_GNL_3:");
+	ft_putendl(remain);
 	if (c_read == 0)
 	{
 		if (ft_strlen(str) > 0)
