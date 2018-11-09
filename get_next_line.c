@@ -6,7 +6,7 @@
 /*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 12:22:15 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/11/09 09:09:55 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/11/09 16:37:01 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,13 @@ t_list			*ft_list_mgmt(t_list *gnl, const int fd, char *str)
 	return (tmp);
 }
 
-char			*ft_split(char *str)
-{
-	int			i;
-
-	i = 0;
-	while (str[i] != '\n' && str[i])
-		i++;
-	if (str[i] == '\n' && str[i + 1] != '\0')
-	{
-		str = str + i + 1;
-		return (ft_strdup(str));
-	}
-	return (ft_strnew(1));
-}
-
 int				get_next_line(const int fd, char **line)
 {
 	char		*buf;
 	char		*str;
 	static char	*remain;
-	int		i;
-	int		c_read;
+	int			i;
+	int			c_read;
 
 	if (!(buf = malloc(sizeof(char) * (BUFF_SIZE + 1))))
 		return (-1);
@@ -58,7 +43,7 @@ int				get_next_line(const int fd, char **line)
 	str = ft_strnew(1000);
 	*line = str;
 	if (!remain)
-		remain = ft_strnew(100);
+		remain = ft_strnew(1000);
 	else
 	{
 		i = 0;
@@ -93,7 +78,7 @@ int				get_next_line(const int fd, char **line)
 		{
 			ft_bzero(remain, ft_strlen(remain));
 			return (1);
-		}	
+		}
 		free(str);
 		return (0);
 	}
