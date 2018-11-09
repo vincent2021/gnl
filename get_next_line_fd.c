@@ -6,19 +6,36 @@
 /*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 12:22:15 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/11/09 17:21:50 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/11/09 17:20:30 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int					get_next_line(const int fd, char **line)
+char				*ft_lst(t_list *gnl, const int fd, char *str)
+{
+	t_list			*tmp;
+
+	tmp = gnl;
+	while (tmp)
+	{
+		if ((size_t)fd == tmp->content_size)
+			return (tmp->content);
+		tmp = tmp->next;
+	}
+	tmp = ft_lstnew(str, fd);
+	ft_lstadd(&gnl, tmp);
+	return (tmp->content);
+}
+
+int					get_next_line_fd(const int fd, char **line)
 {
 	char			*buf;
 	char			*str;
 	static char		*remain;
 	int				i;
 	int				c_read;
+	static t_list	*gnl;
 
 	if (!(buf = malloc(sizeof(char) * (BUFF_SIZE + 1))))
 		return (-1);
@@ -52,6 +69,7 @@ int					get_next_line(const int fd, char **line)
 		if (buf[i] == '\n' && i < BUFF_SIZE)
 		{
 			ft_strncpy(remain, buf + i + 1, BUFF_SIZE - i);
+			ft_lst(gnl, fd, remain);
 			free(buf);
 			return (1);
 		}

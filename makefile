@@ -6,7 +6,7 @@
 #    By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/12 16:38:13 by vimucchi          #+#    #+#              #
-#    Updated: 2018/11/09 16:31:01 by vimucchi         ###   ########.fr        #
+#    Updated: 2018/11/09 17:21:17 by vimucchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ CFLAGS = -Wall -Wextra -Werror
 CC = CLANG
 SRC = main.c \
 		get_next_line.c \
+		get_next_line_fd.c
 
 all: $(NAME)
 
