@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 12:22:15 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/11/09 17:20:30 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/11/10 18:20:00 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char				*ft_lst(t_list *gnl, const int fd, char *str)
+t_list			*ft_lst(t_list *gnl, const int fd, char *str)
 {
-	t_list			*tmp;
+	t_list		*tmp;
 
 	tmp = gnl;
 	while (tmp)
@@ -25,16 +25,16 @@ char				*ft_lst(t_list *gnl, const int fd, char *str)
 	}
 	tmp = ft_lstnew(str, fd);
 	ft_lstadd(&gnl, tmp);
-	return (tmp->content);
+	return (tmp);
 }
 
-int					get_next_line_fd(const int fd, char **line)
+int			get_next_line_fd(const int fd, char **line)
 {
-	char			*buf;
-	char			*str;
-	static char		*remain;
-	int				i;
-	int				c_read;
+	char		*buf;
+	char		*str;
+	static char	*remain;
+	int		i;
+	int		c_read;
 	static t_list	*gnl;
 
 	if (!(buf = malloc(sizeof(char) * (BUFF_SIZE + 1))))
@@ -44,7 +44,10 @@ int					get_next_line_fd(const int fd, char **line)
 	str = ft_strnew(1000);
 	*line = str;
 	if (!remain)
+	{
 		remain = ft_strnew(1000);
+		gnl = ft_lst(gnl, fd, remain);
+	}
 	else
 	{
 		i = 0;
@@ -59,6 +62,10 @@ int					get_next_line_fd(const int fd, char **line)
 		else
 			ft_strcat(str, remain);
 	}
+	ft_putendl("-------");
+	ft_putnbr(gnl->content_size);
+	ft_putendl(gnl->content);
+	ft_putendl("-------");
 	while ((c_read = read(fd, buf, BUFF_SIZE)) != 0)
 	{
 		i = 0;
