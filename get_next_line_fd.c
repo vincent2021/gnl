@@ -6,47 +6,52 @@
 /*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 12:22:15 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/11/10 18:20:00 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/11/12 17:19:47 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_list			*ft_lst(t_list *gnl, const int fd, char *str)
+void			*ft_lst_new(char *str, size_t fd)
 {
-	t_list		*tmp;
 
-	tmp = gnl;
+}
+
+t_gnl			*ft_lst_mgmt(t_gnl *mem, char *str, size_t fd)
+{
+	t_gnl		*tmp;
+
+	tmp = mem;
 	while (tmp)
 	{
-		if ((size_t)fd == tmp->content_size)
-			return (tmp->content);
+		if ((size_t)fd == tmp->fd)
+			return (tmp);
 		tmp = tmp->next;
 	}
-	tmp = ft_lstnew(str, fd);
-	ft_lstadd(&gnl, tmp);
+	tmp = ft_lst_add(str, fd);
 	return (tmp);
 }
 
-int			get_next_line_fd(const int fd, char **line)
+int					get_next_line_fd(const int fd, char **line)
 {
-	char		*buf;
-	char		*str;
-	static char	*remain;
-	int		i;
-	int		c_read;
-	static t_list	*gnl;
+	char			*buf;
+	char			*str;
+	char			*remain = NULL;
+	int				i;
+	int				c_read;
+	static t_gnl	*mem;
 
 	if (!(buf = malloc(sizeof(char) * (BUFF_SIZE + 1))))
 		return (-1);
 	if (line == NULL || read(fd, buf, 0) == -1 || fd < 0)
 		return (-1);
+	if (!mem)
+		mem = malloc (sizeof(t_gnl));
 	str = ft_strnew(1000);
 	*line = str;
 	if (!remain)
 	{
-		remain = ft_strnew(1000);
-		gnl = ft_lst(gnl, fd, remain);
+		remain = mem->content;
 	}
 	else
 	{
@@ -63,8 +68,10 @@ int			get_next_line_fd(const int fd, char **line)
 			ft_strcat(str, remain);
 	}
 	ft_putendl("-------");
-	ft_putnbr(gnl->content_size);
-	ft_putendl(gnl->content);
+	ft_putnbr(mem->fd);
+	ft_putchar('\n');
+	ft_putnbr(mem->content_size);
+	ft_putendl(mem->content);
 	ft_putendl("-------");
 	while ((c_read = read(fd, buf, BUFF_SIZE)) != 0)
 	{
@@ -76,7 +83,6 @@ int			get_next_line_fd(const int fd, char **line)
 		if (buf[i] == '\n' && i < BUFF_SIZE)
 		{
 			ft_strncpy(remain, buf + i + 1, BUFF_SIZE - i);
-			ft_lst(gnl, fd, remain);
 			free(buf);
 			return (1);
 		}

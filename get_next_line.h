@@ -6,7 +6,7 @@
 /*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:27:48 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/11/10 18:23:54 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/11/12 17:18:01 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,17 @@
 # include <unistd.h>
 # include "libft/libft.h"
 
-# define BUFF_SIZE 18
+# define BUFF_SIZE 20
 
-int get_next_line(const int fd, char **line);
-int	get_next_line_fd(const int fd, char **line);
+typedef struct		s_gnl
+{
+	char			*content;
+	size_t			content_size;
+	size_t			fd;
+	struct s_gnl	*next;
+}					t_gnl;
+
+int					get_next_line(const int fd, char **line);
+int					get_next_line_fd(const int fd, char **line);
 
 #endif
