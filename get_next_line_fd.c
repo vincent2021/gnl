@@ -6,7 +6,7 @@
 /*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 12:22:15 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/11/14 16:18:17 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/11/19 13:00:36 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,6 @@ t_gnl						*ft_lst_new(t_gnl *mem, size_t fd)
 	new->content = NULL;
 	new->next = mem;
 	return (new);
-}
-
-void			ft_lst_add(t_gnl *mem, char *str)
-{
-	mem->content_size = ft_strlen(str);
-	mem->content = ft_strdup(str);
 }
 
 t_gnl			*ft_lst_mgmt(t_gnl *mem, size_t fd)
@@ -62,7 +56,7 @@ int					get_next_line_fd(const int fd, char **line)
 		return (-1);
 	if (!mem)
 	{
-		mem = malloc (sizeof(t_gnl));
+		mem = malloc(sizeof(t_gnl));
 		mem->content_size = 0;
 		mem->content = NULL;
 		mem->fd = fd;
@@ -86,12 +80,14 @@ int					get_next_line_fd(const int fd, char **line)
 		else
 			ft_strcat(str, remain);
 	}
-	ft_putendl("-------");
+	/*ft_putendl("-------");
+	ft_putnbr(fd);
 	ft_putnbr(tmp->fd);
 	ft_putchar('\n');
 	ft_putnbr(tmp->content_size);
-	ft_putendl(tmp->content);
-	ft_putendl("-------");
+	ft_putstr(tmp->content);
+	ft_putchar('\n');
+	ft_putendl("-------");*/
 	while ((c_read = read(fd, buf, BUFF_SIZE)) != 0)
 	{
 		i = 0;
@@ -101,6 +97,7 @@ int					get_next_line_fd(const int fd, char **line)
 		ft_strncat(str, buf, i);
 		if (buf[i] == '\n' && i < BUFF_SIZE)
 		{
+			tmp->content = malloc(sizeof(char) * BUFF_SIZE - i);
 			ft_strncpy(tmp->content, buf + i + 1, BUFF_SIZE - i);
 			free(buf);
 			return (1);
@@ -110,7 +107,8 @@ int					get_next_line_fd(const int fd, char **line)
 	{
 		if (ft_strlen(str) > 0)
 		{
-			ft_bzero(remain, ft_strlen(remain));
+			if (remain)
+				ft_bzero(remain, ft_strlen(remain));
 			return (1);
 		}
 		free(str);
