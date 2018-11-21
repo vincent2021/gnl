@@ -6,7 +6,7 @@
 /*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 12:22:15 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/11/19 13:00:36 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/11/21 16:26:39 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int					get_next_line_fd(const int fd, char **line)
 	int				i;
 	int				c_read;
 	static t_gnl	*mem;
-	static t_gnl	*tmp;
+	t_gnl			*tmp;
 
 	if (!(buf = malloc(sizeof(char) * (BUFF_SIZE + 1))))
 		return (-1);
