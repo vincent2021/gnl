@@ -24,7 +24,7 @@ int			main(int argc, char **argv)
 	else if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
-		while (get_next_line_fd(fd, &line) == 1)
+		while (get_next_line_new(fd, &line) == 1)
 		{
 			ft_putendl(line);
 			free(line);

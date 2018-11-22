@@ -6,7 +6,7 @@
 /*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:27:48 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/11/19 13:56:17 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/11/22 20:01:38 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ typedef struct		s_gnl
 {
 	char			*content;
 	size_t			content_size;
-	size_t			fd;
+	int				fd;
 	struct s_gnl	*next;
 }					t_gnl;
 
-int					get_next_line(const int fd, char **line);
 int					get_next_line_fd(const int fd, char **line);
+int					get_next_line_new(const int fd, char **line);
 
 #endif

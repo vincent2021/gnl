@@ -6,13 +6,13 @@
 /*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 12:22:15 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/11/21 16:26:39 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/11/22 19:35:45 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_gnl						*ft_lst_new(t_gnl *mem, size_t fd)
+t_gnl						*ft_lst_new2(t_gnl *mem, int fd)
 {
 	t_gnl					*new;
 
@@ -25,18 +25,18 @@ t_gnl						*ft_lst_new(t_gnl *mem, size_t fd)
 	return (new);
 }
 
-t_gnl			*ft_lst_mgmt(t_gnl *mem, size_t fd)
+t_gnl			*ft_lst_mgmt(t_gnl *mem, int fd)
 {
 	t_gnl		*tmp;
 
 	tmp = mem;
 	while (tmp)
 	{
-		if ((size_t)fd == tmp->fd)
+		if (fd == tmp->fd)
 			return (tmp);
 		tmp = tmp->next;
 	}
-	tmp = ft_lst_new(mem, fd);
+	tmp = ft_lst_new2(mem, fd);
 	return (tmp);
 }
 
@@ -80,14 +80,6 @@ int					get_next_line_fd(const int fd, char **line)
 		else
 			ft_strcat(str, remain);
 	}
-	/*ft_putendl("-------");
-	ft_putnbr(fd);
-	ft_putnbr(tmp->fd);
-	ft_putchar('\n');
-	ft_putnbr(tmp->content_size);
-	ft_putstr(tmp->content);
-	ft_putchar('\n');
-	ft_putendl("-------");*/
 	while ((c_read = read(fd, buf, BUFF_SIZE)) != 0)
 	{
 		i = 0;

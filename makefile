@@ -19,7 +19,7 @@ LDLIBS = -lft
 CFLAGS = -Wall -Wextra -Werror -g
 CC = CLANG
 SRC = main.c \
-		get_next_line.c \
+		get_next_line_new.c \
 		get_next_line_fd.c
 
 all: $(NAME)
