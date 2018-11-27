@@ -6,11 +6,42 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 16:23:55 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/11/22 19:58:28 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/11/27 13:23:35 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char				*ft_concat(char *s1, char *s2, size_t len)
+{
+	size_t	i;
+	size_t	len_s1;
+	char	*tmp;
+
+	i = 0;
+	len_s1 = 0;
+	if (s1 != NULL)
+	{
+		len_s1 = ft_strlen(s1);
+		tmp = s1;
+		free(s1);
+		s1 = malloc ((len + len_s1 + 1) * sizeof(char));
+		while (tmp[i])
+		{
+			s1[i] = tmp[i];
+			i++;
+		}
+	}	
+	else
+		s1 = malloc((len + 1) * sizeof(char));
+	while(s2[i - len_s1])
+	{
+		s1[i] = s2[i - len_s1];
+		i++;
+	}
+	s1[i] = '\0';
+	return (s1);	
+}
 
 t_gnl				*ft_get_mem(int fd, t_gnl *mem)
 {
@@ -74,7 +105,7 @@ char				*ft_read(t_gnl *mem, int fd)
 		buf[c_read] = '\0';
 		while (buf[i] != '\n' && buf[i])
 			i++;
-		ft_strncat(str, buf, i);
+		ft_concat(str, buf, i);
 		if (buf[i] == '\n' && i < BUFF_SIZE)
 		{
 			mem->content = malloc(sizeof(char) * BUFF_SIZE - i);
