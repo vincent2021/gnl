@@ -6,7 +6,7 @@
 #    By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/12 16:38:13 by vimucchi          #+#    #+#              #
-#    Updated: 2018/11/26 09:58:27 by vimucchi         ###   ########.fr        #
+#    Updated: 2018/11/28 17:38:52 by vimucchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,7 @@ LDLIBS = -lft
 CFLAGS = -Wall -Wextra -Werror -g
 CC = CLANG
 SRC = main.c \
-		get_next_line_new.c \
-		get_next_line_fd.c
+		get_next_line.c \
 
 all: $(NAME)
 
