@@ -6,7 +6,7 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 16:23:55 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/11/27 13:23:35 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/11/28 13:23:42 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,12 @@ char				*ft_read(t_gnl *mem, int fd)
 			return (str);
 		}
 	}
-	return (0);
+	return (NULL);
 }
 
 int					get_next_line_new(const int fd, char **line)
 {
-	static t_gnl	*mem;
+	static t_gnl	*mem = NULL;
 	t_gnl			*tmp;
 	char			*str;
 
@@ -129,7 +129,7 @@ int					get_next_line_new(const int fd, char **line)
 		return (-1);
 	tmp = ft_get_mem(fd, mem);
 	str = ft_read(tmp, fd);
-	if (ft_strlen(str) > 0)
+	if (str)
 	{
 		*line = str;
 		return (1);
