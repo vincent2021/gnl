@@ -39,34 +39,40 @@ int				ft_getline(t_gnl *mem, char **line, int c_read)
 	return (0);
 }
 
+void				ft_cpybuf(t_gnl *mem, char *buf)
+{
+	char 			*tmp;
+
+	if (!mem->content)
+		mem->content = ft_strdup(buf);
+	else
+	{
+		tmp = mem->content;
+		mem->content = ft_strjoin(mem->content, buf);
+		ft_strdel(&tmp);
+	}
+}
+
 int				ft_read(int fd, char **line, t_gnl *mem)
 {
 	char			*buf;
 	size_t			c_read;
-	char			*tmp;
 
 	if (!(buf = malloc((BUFF_SIZE + 1) * sizeof(char))))
 		return (-1);
 	while ((c_read = read(fd, buf, BUFF_SIZE)) != 0)
 	{
 		buf[c_read] = '\0';
-		if (!mem->content)
-			mem->content = ft_strdup(buf);
-		else
-		{
-			tmp = mem->content;
-			mem->content = ft_strjoin(mem->content, buf);
-			ft_strdel(&tmp);
-		}
+		ft_cpybuf(mem, buf);
 		if (ft_getline(mem, line, c_read))
 		{
-			free(buf);
+			ft_strdel(&buf);
 			return (1);
 		}
 	}
 	while (ft_getline(mem, line, c_read) == 1)
 	{
-		free(buf);
+		ft_strdel(&buf);
 		return (1);
 	}
 	free(buf);
