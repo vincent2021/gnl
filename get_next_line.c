@@ -59,12 +59,18 @@ int				ft_read(int fd, char **line, t_gnl *mem)
 			ft_strdel(&tmp);
 		}
 		if (ft_getline(mem, line, c_read))
+		{
+			free(buf);
 			return (1);
+		}
 	}
 	while (ft_getline(mem, line, c_read) == 1)
+	{
+		free(buf);
 		return (1);
+	}
+	free(buf);
 	return (0);
-	
 }
 
 t_gnl				*ft_lst_new(int fd, t_gnl *mem)
