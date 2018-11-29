@@ -6,7 +6,7 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:24:52 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/11/29 13:21:09 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/11/29 17:16:00 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int				ft_getline(t_gnl *mem, char **line, int c_read)
 {
 	size_t			i;
-	char			*tmp;
+	char			*tmp = NULL;
 
 	i = 0;
 	while (mem->content[i] != '\n' && mem->content[i])
@@ -30,9 +30,9 @@ int				ft_getline(t_gnl *mem, char **line, int c_read)
 			ft_strdel(&mem->content);
 		else
 		{
-			tmp = mem->content + i + 1;
+			tmp = ft_strdup(mem->content + i + 1);
 			ft_strdel(&mem->content);
-			mem->content = ft_strdup(tmp);
+			mem->content = tmp;
 		}
 		return (1);
 	}
@@ -58,7 +58,6 @@ int				ft_read(int fd, char **line, t_gnl *mem)
 			mem->content = ft_strjoin(mem->content, buf);
 			ft_strdel(&tmp);
 		}
-		printf("R_boucle:%s\n", mem->content);
 		if (ft_getline(mem, line, c_read))
 			return (1);
 	}
