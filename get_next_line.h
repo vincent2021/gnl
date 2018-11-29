@@ -6,7 +6,7 @@
 /*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:27:48 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/11/28 17:37:54 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/11/29 13:11:59 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 # include <unistd.h>
 # include "libft/libft.h"
 
-# define BUFF_SIZE 20
+# include "stdio.h"
+
+# define BUFF_SIZE 12
 
 typedef struct		s_gnl
 {
