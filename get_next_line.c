@@ -6,16 +6,16 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:24:52 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/11/30 10:08:43 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/11/30 12:40:41 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int			ft_getline(t_gnl *mem, char **line, int c_read)
+int					ft_getline(t_gnl *mem, char **line, int c_read)
 {
-	size_t		i;
-	char		*tmp;
+	size_t			i;
+	char			*tmp;
 
 	i = 0;
 	while (mem->content[i] != '\n' && mem->content[i])
@@ -39,9 +39,9 @@ int			ft_getline(t_gnl *mem, char **line, int c_read)
 	return (0);
 }
 
-void			ft_cpybuf(t_gnl *mem, char *buf)
+void				ft_cpybuf(t_gnl *mem, char *buf)
 {
-	char 		*tmp;
+	char			*tmp;
 
 	if (!mem->content)
 		mem->content = ft_strdup(buf);
@@ -53,10 +53,10 @@ void			ft_cpybuf(t_gnl *mem, char *buf)
 	}
 }
 
-int			ft_read(int fd, char **line, t_gnl *mem)
+int					ft_read(int fd, char **line, t_gnl *mem)
 {
-	char		*buf;
-	size_t		c_read;
+	char			*buf;
+	size_t			c_read;
 
 	if (!(buf = malloc((BUFF_SIZE + 1) * sizeof(char))))
 		return (-1);
@@ -79,9 +79,9 @@ int			ft_read(int fd, char **line, t_gnl *mem)
 	return (0);
 }
 
-t_gnl			*ft_lst_new(int fd, t_gnl *mem)
+t_gnl				*ft_lst_new(int fd, t_gnl *mem)
 {
-	t_gnl		*new;
+	t_gnl			*new;
 
 	if (!(new = malloc(sizeof(t_gnl))))
 		return (0);
@@ -91,10 +91,10 @@ t_gnl			*ft_lst_new(int fd, t_gnl *mem)
 	return (new);
 }
 
-int			get_next_line(const int fd, char **line)
+int					get_next_line(const int fd, char **line)
 {
 	static t_gnl	*mem = NULL;
-	t_gnl		*tmp;
+	t_gnl			*tmp;
 
 	if (line == NULL || read(fd, NULL, 0) == -1 || fd < 0)
 		return (-1);
