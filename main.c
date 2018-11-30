@@ -6,11 +6,12 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 16:40:11 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/11/29 13:14:52 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/11/30 10:18:35 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <fcntl.h>
 
 int			main(int argc, char **argv)
 {
@@ -26,7 +27,6 @@ int			main(int argc, char **argv)
 		fd = open(argv[1], O_RDONLY);
 		while (get_next_line(fd, &line) == 1)
 		{
-			ft_putstr("Line:");
 			ft_putendl(line);
 			free(line);
 		}
