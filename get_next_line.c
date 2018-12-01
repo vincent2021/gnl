@@ -6,7 +6,7 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:24:52 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/11/30 12:40:41 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/12/01 19:00:05 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int					ft_read(int fd, char **line, t_gnl *mem)
 
 	if (!(buf = malloc((BUFF_SIZE + 1) * sizeof(char))))
 		return (-1);
-	while ((c_read = read(fd, buf, BUFF_SIZE)) != 0)
+	while ((c_read = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		buf[c_read] = '\0';
 		ft_cpybuf(mem, buf);
