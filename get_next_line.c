@@ -6,7 +6,7 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:24:52 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/12/01 19:00:05 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/12/02 23:50:34 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,29 @@
 int					ft_getline(t_gnl *mem, char **line, int c_read)
 {
 	size_t			i;
+	size_t			len;
 	char			*tmp;
 
 	i = 0;
+	len = ft_strlen (mem->content);
 	while (mem->content[i] != '\n' && mem->content[i])
 		i++;
-	if (c_read == 0 && ft_strlen(mem->content) > 0)
-		mem->content[i] = '\n';
-	if (mem->content[i] == '\n')
+	ft_putchar('\n');
+	ft_putnbr(i);
+	ft_putendl("<= i get_line");
+	if (mem->content[i] == '\n' || (c_read == 0 && i == len))
 	{
 		*line = ft_strnew(i);
-		*line = ft_strncpy(*line, mem->content, i);
-		if (i == ft_strlen(mem->content))
+		ft_strncpy(*line, mem->content, i);
+		ft_putnbr(len);
+		ft_putendl("<=len mem->content");
+		if (i == len - 1)
 			ft_strdel(&mem->content);
-		else
+		else 
 		{
 			tmp = ft_strdup(mem->content + i + 1);
 			ft_strdel(&mem->content);
+			ft_putendl(tmp);
 			mem->content = tmp;
 		}
 		return (1);
@@ -63,6 +69,8 @@ int					ft_read(int fd, char **line, t_gnl *mem)
 	while ((c_read = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		buf[c_read] = '\0';
+		ft_putnbr(c_read);
+		ft_putendl("<= c_read");
 		ft_cpybuf(mem, buf);
 		if (ft_getline(mem, line, c_read))
 		{
@@ -70,12 +78,14 @@ int					ft_read(int fd, char **line, t_gnl *mem)
 			return (1);
 		}
 	}
-	while (ft_getline(mem, line, c_read) == 1)
+	while (ft_getline(mem, line, 0) == 1)
 	{
 		ft_strdel(&buf);
+		ft_putendl("-------------end--------------");
 		return (1);
 	}
 	free(buf);
+	ft_putendl(mem->content);
 	return (0);
 }
 
@@ -105,5 +115,10 @@ int					get_next_line(const int fd, char **line)
 		tmp = tmp->next;
 	if (!tmp)
 		return (ft_read(fd, line, (mem = ft_lst_new(fd, mem))));
+	ft_putendl("--------Start------");
+	ft_putnbr(fd);
+	ft_putchar('/');
+	ft_putnbr(tmp->fd);
+	ft_putendl(tmp->content);
 	return (ft_read(fd, line, tmp));
 }
