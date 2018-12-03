@@ -6,7 +6,7 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:24:52 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/12/03 16:26:33 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/12/03 16:49:31 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int					ft_getline(t_gnl *mem, char **line, int c_rd)
 	else if (mem->str[i] == '\n')
 	{
 		*line = ft_strnew(i);
-		ft_strncpy(*line, mem->str, i);
+		*line = ft_strncpy(*line, mem->str, i);
 		tmp = ft_strdup(mem->str + i + 1);
 		ft_strdel(&mem->str);
 		mem->str = tmp;

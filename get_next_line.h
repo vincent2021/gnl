@@ -6,7 +6,7 @@
 /*   By: vimucchi <vimucchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 21:27:48 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/12/03 16:15:32 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/12/03 16:52:12 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <sys/uio.h>
 # include "libft/includes/libft.h"
 
-# define BUFF_SIZE 32
+# define BUFF_SIZE 18
 
 typedef struct		s_gnl
 {
