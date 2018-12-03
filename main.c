@@ -6,7 +6,7 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 16:40:11 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/12/02 21:30:23 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/12/03 16:09:05 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ int			main(int argc, char **argv)
 	int		fd;
 
 	if (argc < 2)
+	{
 		fd = 0;
+	}
 	else if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
