@@ -6,12 +6,11 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:24:52 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/12/03 16:13:14 by vimucchi         ###   ########.fr       */
+/*   Updated: 2018/12/03 16:26:33 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 int					ft_getline(t_gnl *mem, char **line, int c_rd)
 {
