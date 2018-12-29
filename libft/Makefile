@@ -6,12 +6,12 @@
 #    By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/28 15:20:11 by vimucchi          #+#    #+#              #
-#    Updated: 2018/11/30 10:20:58 by vimucchi         ###   ########.fr        #
+#    Updated: 2018/12/29 21:17:17 by vimucchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-CC = clang
+CC = gcc
 FLAGS = -Wall -Werror -Wextra
 
 SRC = \
