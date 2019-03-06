@@ -6,7 +6,7 @@
 #    By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/28 15:20:11 by vimucchi          #+#    #+#              #
-#    Updated: 2018/12/29 21:17:17 by vimucchi         ###   ########.fr        #
+#    Updated: 2019/03/06 15:03:43 by vimucchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,9 +84,9 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 %.o: %.c 
-	@$(CC) $(FLAGS) -Iincludes -o $@ -c $<
+	@$(CC) $(FLAGS) -Ilibft.h -o $@ -c $<
 
-$(NAME): $(OBJ) includes/libft.h
+$(NAME): $(OBJ) libft.h
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 

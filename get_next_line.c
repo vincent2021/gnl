@@ -6,7 +6,7 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:24:52 by vimucchi          #+#    #+#             */
-/*   Updated: 2018/12/03 16:49:31 by vimucchi         ###   ########.fr       */
+/*   Updated: 2019/03/06 15:01:18 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int					ft_getline(t_gnl *mem, char **line, int c_rd)
 	char			*tmp;
 
 	i = 0;
+	if (!mem->str)
+		return (0);
 	l = ft_strlen(mem->str);
 	while (mem->str[i] && mem->str[i] != '\n')
 		i++;
@@ -72,7 +74,7 @@ int					ft_read(int fd, char **line, t_gnl *mem)
 			return (1);
 		}
 	}
-	if (ft_getline(mem, line, 0) == 1)
+	if (ft_getline(mem, line, 0))
 	{
 		ft_strdel(&buf);
 		return (1);
